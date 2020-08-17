@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
 import 'package:intl/intl.dart';
@@ -9,6 +10,7 @@ class WorldTime {
     String locationUrl;
     String time;
     String flag;
+    bool isDaytime;
 
     WorldTime({ this.location, this.locationUrl, this.flag });
 
@@ -27,9 +29,11 @@ class WorldTime {
 
                 /// Update time
                 this.time = DateFormat.jm().format(dateTime);
+                this.isDaytime = (dateTime.hour > 6 && dateTime.hour < 20) ? true : false;
             } catch (error) {
                 /// Update time is nil
                 this.time = '';
+                this.isDaytime = false;
             }
         } else {
             print('Request failed with status: ${response.statusCode}.');

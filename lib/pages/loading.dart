@@ -19,12 +19,17 @@ class _LoadingState extends State<Loading> {
   }
 
   void setupWorldTime() async {
-    WorldTime worldTime = WorldTime(location: 'Japan', locationUrl: 'Asia/Tokyo', flag: 'japan.png');
+    WorldTime worldTime = WorldTime(locationUrl: 'Europe/London', location: 'London', flag: 'uk.png');
     await worldTime.getTime();
     Navigator.pushNamed(
       context,
       Home.routeName,
-      arguments: WorldTimeArguments(time: worldTime.time, flag: worldTime.flag, location: worldTime.location),
+      arguments: WorldTimeArguments(
+          time: worldTime.time,
+          flag: worldTime.flag,
+          location: worldTime.location,
+          isDaytime: worldTime.isDaytime
+      ),
     );
   }
 
